@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'detector.g.dart';
+
+@JsonSerializable()
 class Detector {
   Detector({
     required this.id,
@@ -6,8 +11,8 @@ class Detector {
     required this.currentMetricsType,
     required this.currentMetricsUnit,
     required this.roomId,
-    required this.minValue,
-    required this.maxValue,
+    this.minValue,
+    this.maxValue,
   });
 
   final int id;
@@ -16,6 +21,11 @@ class Detector {
   final String currentMetricsType;
   final String currentMetricsUnit;
   final int roomId;
-  final int minValue;
-  final int maxValue;
+  final int? minValue;
+  final int? maxValue;
+
+  factory Detector.fromJson(Map<String, dynamic> json) =>
+      _$DetectorFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DetectorToJson(this);
 }

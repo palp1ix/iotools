@@ -1,6 +1,8 @@
 import 'dart:async';
 
-import 'package:iotools/data/model/datasource/local/secure_storage.dart';
+import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import 'package:iotools/data/datasource/local/secure_storage.dart';
 import 'package:iotools/data/model/user/user.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -33,17 +35,28 @@ class AuthService {
     return decodedToken['isMaster'] as bool;
   }
 
+  int? _companyId(String? token) {
+    if (token == null) {
+      return null;
+    }
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(token!);
+    return decodedToken['companyId'] as int;
+  }
+
+  Future<int?> get companyId async => _companyId(await storage.getToken());
+
   Future<void> saveJwt() {
     return Future.delayed(const Duration(seconds: 1));
   }
 
-  Future<void> initializeUser() async {
+  Future<String?> initializeUser() async {
     try {
       final token = await storage.getToken();
       if (token != null) {
         isAuntificated = true;
       }
-    } on Exception catch (e) {
+      return token;
+    } catch (e) {
       print('Error while getting jwt in init');
     }
   }

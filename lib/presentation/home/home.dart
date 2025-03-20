@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:iotools/bloc/detectors/detectors_bloc.dart';
+import 'package:iotools/core/router/router.gr.dart';
 import 'package:iotools/core/theme/fonts.dart';
 import 'package:iotools/presentation/home/widgets/home_appbar.dart';
 import 'package:iotools/presentation/home/widgets/iot_devices_widget.dart';
@@ -9,8 +12,21 @@ import 'package:iotools/presentation/shared/chart.dart';
 import 'package:iotools/presentation/shared/primary_button.dart';
 
 @RoutePage()
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late DetectorsBloc detectorsBloc;
+  @override
+  void initState() {
+    detectorsBloc = context.read<DetectorsBloc>();
+    detectorsBloc.add(GetDetectors());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +58,9 @@ class HomeScreen extends StatelessWidget {
                     AdvancedButton(
                       text: 'Все помещения',
                       icon: Icon(Icons.factory),
+                      onPressed: () {
+                        context.router.push(RoomsRoute());
+                      },
                     ),
                     Gap(15),
                     AdvancedButton(
@@ -62,15 +81,22 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            IoTDivecesWidget(),
-            SliverToBoxAdapter(
-              child: PrimaryButton(
-                text: 'Больше устройств',
-                onPressed: () {},
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                fontSize: 20,
-                fontColor: Colors.black,
-              ),
+            BlocBuilder<DetectorsBloc, DetectorsState>(
+              builder: (context, state) {
+                if (state is DetectorsLoaded) {
+                  return IoTDevicesWidget(detectors: state.detectors);
+                } else {
+                  return SliverToBoxAdapter(
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 300,
+                      child: Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
+                    ),
+                  );
+                }
+              },
             ),
           ],
         ),

@@ -7,14 +7,14 @@ part of 'room.dart';
 // **************************************************************************
 
 Room _$RoomFromJson(Map<String, dynamic> json) => Room(
-  id: (json['id'] as num).toInt(),
+  id: (json['id'] as num?)?.toInt(),
   name: json['name'] as String,
   companyId: (json['companyId'] as num).toInt(),
   ownerId: (json['ownerId'] as num).toInt(),
 );
 
 Map<String, dynamic> _$RoomToJson(Room instance) => <String, dynamic>{
-  'id': instance.id,
+  if (instance.id case final value?) 'id': value,
   'name': instance.name,
   'companyId': instance.companyId,
   'ownerId': instance.ownerId,

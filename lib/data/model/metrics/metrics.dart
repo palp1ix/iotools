@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'metrics.g.dart';
+
+@JsonSerializable()
 class Metrics {
   Metrics({
     required this.id,
@@ -14,4 +19,9 @@ class Metrics {
   final DateTime timestamp;
   final String type;
   final String unit;
+
+  factory Metrics.fromJson(Map<String, dynamic> json) =>
+      _$MetricsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MetricsToJson(this);
 }

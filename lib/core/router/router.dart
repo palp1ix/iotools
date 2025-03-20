@@ -10,5 +10,9 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: LoginRoute.page, path: '/login'),
     AutoRoute(page: RegistrationRoute.page, path: '/registration'),
     AutoRoute(page: IntroduceRoute.page, path: '/introduce'),
+    AutoRoute(page: RoomsRoute.page, path: '/rooms'),
+    AutoRoute(page: AddRoomRoute.page, path: '/add_room'),
+    AutoRoute(page: SensorAlertRoute.page, path: '/notification'),
+    AutoRoute(page: DetectorRoute.page, path: '/detector'),
   ];
 }

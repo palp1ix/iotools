@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iotools/data/model/datasource/remote/remote_datasoure.dart';
+import 'package:iotools/data/datasource/remote/remote_datasoure.dart';
 import 'package:iotools/data/model/user/user.dart';
 
 part 'auth_event.dart';
