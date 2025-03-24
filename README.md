@@ -1,3 +1,7 @@
+## 📸 Скриншот главного экрана
+
+<img src="images/simulator_screenshot_34F16876-A554-4BDB-BD0F-BCF55661B65D.png" alt="Главный экран" width="200">
+
 # IoT Control – Flutter App for Hackathon MTC
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.10-blue)](https://flutter.dev/)
@@ -21,10 +25,6 @@
 - **BLoC** – управление состоянием
 - **Dart** – язык программирования
 - **REST API / WebSocket** – получение данных  
-
-## 📸 Скриншот главного экрана
-
-![Главный экран](images/simulator_screenshot_34F16876-A554-4BDB-BD0F-BCF55661B65D.png)
 
 ## 📦 Установка
 
