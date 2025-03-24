@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'sensor_analysis_model.g.dart';
 
 @JsonSerializable()
-class SensorAnalysisModel {
+class SensorAnalysisModel extends Equatable {
   final Analysis analysis;
 
   SensorAnalysisModel({required this.analysis});
@@ -12,6 +13,10 @@ class SensorAnalysisModel {
       _$SensorAnalysisModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$SensorAnalysisModelToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [analysis];
 }
 
 @JsonSerializable()
